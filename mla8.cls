@@ -1,14 +1,18 @@
 % A modified version of jackson13info's mla13.sty for formatting MLA documents (https://github.com/jackson13info/mla13)
 
+
 \ProvidesClass{mla8}
 \LoadClass[12pt]{article}
 
-\usepackage[letterpaper]{geometry}
+%\usepackage{fullpage}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage[american]{babel}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{csquotes}
-\usepackage{setspace}
 \setlength{\parindent}{0.5in}
+
+% Double-spaced, as required by MLA
+\linespread{2}
 
 %biblatex
 \usepackage[style=mla,mladraft=false,
@@ -17,13 +21,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 %annotation=true  %uncomment to enable annotations
 ]{biblatex}
 
-%creates \sources, an alias for \bibliography
-\newcommand{\sources}[1]{
-  \def\@sources{#1}
-  \bibliography{#1}
-}
-
-%removes the space added to the center environment
+% New version of {center} environment that doesn't add extra spacing
 \newenvironment{nospacecenter}{\parskip=0pt\par\nopagebreak\centering}{\par\noindent\ignorespacesafterend}
 
 %Formatting Commands
@@ -51,64 +49,64 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
                                          {\normalfont}}
 
 %Bibliography Commands
-\DeclareFieldFormat{ibidpostnote}{#1}
-\renewbibmacro*{cite:idem}{
-  \ifsingletitle
-    {\iffieldundef{postnote}
-      {\usebibmacro{cite:name}}
-      {\unspace\global\boolfalse{cbx@named}}}
+\DeclareFieldFormat{ibidpostnote}{#1}%
+\renewbibmacro*{cite:idem}{%
+  \ifsingletitle%
+    {\iffieldundef{postnote}%
+      {\usebibmacro{cite:name}}%
+      {\unspace\global\boolfalse{cbx@named}}}%
     {\addspace\global\boolfalse{cbx@named}}}
-\renewbibmacro*{cite:mla:title:internal}{ % 0.7.1 new internal macro
-  \ifbool{cbx@named}
-    {\unspace\addcomma\addspace}
-    {}
-  \iffieldundef{title}
-    {\iffieldequalstr{entrytype}{review}
-      {\printtext[bibhyperref]{\printtext{\bibstring{reviewof}
-       \addspace\printfield{booktitle}}}}
+\renewbibmacro*{cite:mla:title:internal}{% 0.7.1 new internal macro
+  \ifbool{cbx@named}%
+    {\unspace\addcomma\addspace}%
+    {}%
+  \iffieldundef{title}%
+    {\iffieldequalstr{entrytype}{review}%
+      {\printtext[bibhyperref]{\printtext{\bibstring{reviewof}%
+       \addspace\printfield{booktitle}}}}%
       {\ifthenelse{\iffieldequalstr{entrytype}{suppbook}% 0.7.1
-         \OR\iffieldequalstr{entrytype}{suppcollection}}
-        {\printtext[bibhyperref]{
-         \printfield[mla:capital]{entrysubtype}}}
-        {}}}
-    {\printtext[bibhyperref]{
-       \printfield[citetitle:\strfield{entrytype}]{labeltitle}}}}
-\renewbibmacro*{cite:mla:title}{ % 0.7.1 tidied up
-  \unspace
-  \ifnameundef{labelname}
-    {\unspace
-     \printtext[bibhyperref]{
-       \printfield[citetitle:\strfield{entrytype}]{labeltitle}}
-     \iffieldundef{postnote}
-       {}
-       {\addspace}}
-    {\ifsingletitle
-      {}
-      {\usebibmacro{cite:mla:title:internal}\addspace}}
-  \ifthenelse{\iffieldequalstr{entrytype}{review}
-      \and\ifnameundef{author}
-      \and\iffieldundef{title}}
-    {\printtext[bibhyperref]
-      {\unspace\printtext{\bibcpstring{reviewof}
-       \addspace\printfield{booktitle}}}}
-    {}}
+         \OR\iffieldequalstr{entrytype}{suppcollection}}%
+        {\printtext[bibhyperref]{%
+         \printfield[mla:capital]{entrysubtype}}}%
+        {}}}%
+    {\printtext[bibhyperref]{%
+       \printfield[citetitle:\strfield{entrytype}]{labeltitle}}}}%
+\renewbibmacro*{cite:mla:title}{% 0.7.1 tidied up
+  \unspace%
+  \ifnameundef{labelname}%
+    {\unspace%
+     \printtext[bibhyperref]{%
+       \printfield[citetitle:\strfield{entrytype}]{labeltitle}}%
+     \iffieldundef{postnote}%
+       {}%
+       {\addspace}}%
+    {\ifsingletitle%
+      {}%
+      {\usebibmacro{cite:mla:title:internal}\addspace}}%
+  \ifthenelse{\iffieldequalstr{entrytype}{review}%
+      \and\ifnameundef{author}%
+      \and\iffieldundef{title}}%
+    {\printtext[bibhyperref]%
+      {\unspace\printtext{\bibcpstring{reviewof}%
+       \addspace\printfield{booktitle}}}}%
+    {}}%
 \DeclareCiteCommand{\cite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
    \usebibmacro{cite:mla}}{}
   {\usebibmacro{postnote}}
 \defbibheading{apa}[\refname]{}
 
 %Annotations for the Bibliography
-\renewbibmacro{finentry}{ %Renew the annotation macro
+\renewbibmacro{finentry}{%Renew the annotation macro
    \finentry
-   \iffieldundef{annotation}
-     {}
-     {\ifbool{bbx@annotation}
-       {\begin{quotation}\noindent %Make the annotation look like a quotation and remove the indent
-          \printfield{annotation}
-        \end{quotation}}
-       {}}
+   \iffieldundef{annotation}%
+     {}%
+     {\ifbool{bbx@annotation}%
+       {\begin{quotation}\noindent%Make the annotation look like a quotation and remove the indent
+          \printfield{annotation}%
+        \end{quotation}}%
+       {}}%
 }
 %End Annotation Section
 
@@ -132,10 +130,9 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 %  \newunit}
 %end section
 
-\geometry{top=1.0in,bottom=1.0in,left=1.0in,right=1.0in}
 \usepackage{datetime}
 \usepackage{fancyhdr}
-\linespread{2}
+
 \def\@firstname{ }
 \newcommand{\firstname}[1]{
   \def\@firstname{#1}
@@ -150,6 +147,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 \newcommand{\class}[1]{
   \def\@class{#1}
 }
+
 \pagestyle{empty}
 \pagestyle{fancy}
 \fancyhf{}
@@ -175,4 +173,12 @@ Works Cited
 \end{center}
 \printbibliography[heading=apa]
 \endgroup}
+
+% Outline environment
+\newenvironment{outline}
+{
+    \renewcommand{\labelenumi}{\Roman{enumi}.}
+    \renewcommand{\labelenumii}{\Alph{enumii}.}
+    \renewcommand{\labelenumiii}{\arabic{enumiii}.}
+}{}
 

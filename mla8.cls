@@ -3,11 +3,13 @@
 
 \ProvidesClass{mla8}
 \LoadClass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
 
 %\usepackage{fullpage}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage[american]{babel}
-\usepackage[hidelinks]{hyperref}
+\usepackage{hyperref}
 \usepackage{csquotes}
 \setlength{\parindent}{0.5in}
 
@@ -148,6 +150,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
   \def\@class{#1}
 }
 
+%Header and footer
 \pagestyle{empty}
 \pagestyle{fancy}
 \fancyhf{}
@@ -155,6 +158,8 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 \renewcommand{\headrulewidth}{0pt}
 \rhead{\@lastname\ \thepage}
 \newdateformat{datef}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
+
+%Title
 \newcommand*{\makeheader}{\begingroup
 \rmfamily
 \fontsize{12}{2}
@@ -166,6 +171,8 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 \@title
 \end{nospacecenter}
 \endgroup}
+
+% Works Cited environment
 \newcommand*{\makeworkscited}{\begingroup
 \pagebreak
 \begin{center}
@@ -181,4 +188,3 @@ Works Cited
     \renewcommand{\labelenumii}{\Alph{enumii}.}
     \renewcommand{\labelenumiii}{\arabic{enumiii}.}
 }{}
-

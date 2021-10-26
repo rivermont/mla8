@@ -13,20 +13,23 @@
 \usepackage{csquotes}
 \setlength{\parindent}{0.5in}
 
+\usepackage{datetime}
+\usepackage{fancyhdr}
+
 % Double-spaced, as required by MLA
 \linespread{2}
 
-%biblatex
+% biblatex
 \usepackage[style=mla,mladraft=false,
-noremoteinfo=true, %disables doi, issn, isbn, &c.
-showmedium=false, %this hides the annoying 'Print' that is appended to items without a url
-%annotation=true  %uncomment to enable annotations
+noremoteinfo=true, % disables doi, issn, isbn, &c.
+showmedium=false, % this hides the annoying 'Print' that is appended to items without a url
+%annotation=true  % uncomment to enable annotations
 ]{biblatex}
 
 % New version of {center} environment that doesn't add extra spacing
 \newenvironment{nospacecenter}{\parskip=0pt\par\nopagebreak\centering}{\par\noindent\ignorespacesafterend}
 
-%Formatting Commands
+% Formatting Commands
 \renewcommand \thesection {\@arabic\c@section.}
 \renewcommand\thesubsection   {\thesection\@arabic\c@subsection}
 \renewcommand\section{\@startsection{section}{1}{\z@}
@@ -50,7 +53,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
                                          {\lineskip}
                                          {\normalfont}}
 
-%Bibliography Commands
+% Bibliography Commands
 \DeclareFieldFormat{ibidpostnote}{#1}%
 \renewbibmacro*{cite:idem}{%
   \ifsingletitle%
@@ -99,7 +102,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
   {\usebibmacro{postnote}}
 \defbibheading{apa}[\refname]{}
 
-%Annotations for the Bibliography
+% Annotations for the Bibliography
 \renewbibmacro{finentry}{%Renew the annotation macro
    \finentry
    \iffieldundef{annotation}%
@@ -110,16 +113,13 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
         \end{quotation}}%
        {}}%
 }
-%End Annotation Section
 
 % Formatting Section Headings
 \def\section{\@startsection{section}{1}{\z@}{-5.25ex plus -1ex minus
 -.2ex}{1.5ex plus .2ex}{\center}}
 \def\thesection{\arabic{section}.}
-% End Formatting Section Headings
 
-%End Bibliography Commands
-%remove parenthesis from bibliography
+% Remove parenthesis from bibliography
 %\renewbibmacro*{issue+date}{%
 %  \setunit{\addcomma\space}% NEW
 %  \printtext[parens]{% DELETED
@@ -130,11 +130,8 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 %       \usebibmacro{date}}}% DELETED
 %       \usebibmacro{date}}% NEW
 %  \newunit}
-%end section
 
-\usepackage{datetime}
-\usepackage{fancyhdr}
-
+% Header info commands
 \def\@firstname{ }
 \newcommand{\firstname}[1]{
   \def\@firstname{#1}
@@ -150,7 +147,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
   \def\@class{#1}
 }
 
-%Header and footer
+% Header and footer
 \pagestyle{empty}
 \pagestyle{fancy}
 \fancyhf{}
@@ -159,7 +156,7 @@ showmedium=false, %this hides the annoying 'Print' that is appended to items wit
 \rhead{\@lastname\ \thepage}
 \newdateformat{datef}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
 
-%Title
+% Title
 \newcommand*{\makeheader}{\begingroup
 \rmfamily
 \fontsize{12}{2}

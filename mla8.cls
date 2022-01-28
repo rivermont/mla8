@@ -1,5 +1,5 @@
+% https://github.com/rivermont/mla8
 % A modified version of jackson13info's mla13.sty for formatting MLA documents (https://github.com/jackson13info/mla13)
-
 
 \ProvidesClass{mla8}
 \LoadClass[12pt]{article}
@@ -21,10 +21,10 @@
 
 % biblatex
 \usepackage[style=mla,mladraft=false,
-noremoteinfo=true, % disables doi, issn, isbn, &c.
-showmedium=false, % this hides the annoying 'Print' that is appended to items without a url
-%annotation=true  % uncomment to enable annotations
-]{biblatex}
+            noremoteinfo=true, % disables doi, issn, isbn, &c.
+            showmedium=false, % this hides the annoying 'Print' that is appended to items without a url
+%             annotation=true % uncomment to enable annotations
+            ]{biblatex}
 
 % New version of {center} environment that doesn't add extra spacing
 \newenvironment{nospacecenter}{\parskip=0pt\par\nopagebreak\centering}{\par\noindent\ignorespacesafterend}
@@ -120,7 +120,7 @@ showmedium=false, % this hides the annoying 'Print' that is appended to items wi
 \def\thesection{\arabic{section}.}
 
 % Remove parenthesis from bibliography
-%\renewbibmacro*{issue+date}{%
+% \renewbibmacro*{issue+date}{%
 %  \setunit{\addcomma\space}% NEW
 %  \printtext[parens]{% DELETED
 %    \iffieldundef{issue}
